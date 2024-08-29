@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "root",
+    "password": "priyanaik",
+    "database": "collegedb",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  
+  },
+  "test": {
+    "username": "root",
+    "password": "priyanaik",
+    "database": "collegedb_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "priyanaik",
+    "database": "collegedb_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
