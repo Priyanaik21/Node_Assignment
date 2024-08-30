@@ -14,6 +14,7 @@ const students = sequelize.define('students', {
       model: 'userInformations', 
       key: 'user_id',
     },
+    unique:true,
   },
   deletedAt: {
     type: DataTypes.DATE,
@@ -29,6 +30,7 @@ const students = sequelize.define('students', {
   },
 }, {
   tableName: 'students',
+  paranoid: true,
 });
 
 students.associate = function(models) {
