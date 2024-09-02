@@ -13,7 +13,7 @@ const InstructorCourse = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'instructors', 
+        model: 'instructors',
         key: 'instructor_id',
       },
       onDelete: 'CASCADE',

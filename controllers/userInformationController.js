@@ -15,15 +15,10 @@ const {
   NOT_FOUND,
 }= require("../utils/statusCode.js");
 
-
 class UserInformationController {
   async createUser(req, res) {
-    console.log(req.body);
-    
     try {
       const user = await UserInformationService.createUser(req.body);
-      console.log(user);
-      
       res.status(CREATED).json(user);
     } catch (error) {
       res.status(BAD_REQUEST).json({ error: CREATE_USER_ERROR });
@@ -59,10 +54,11 @@ class UserInformationController {
 
   async getAllUsers(req, res) {
     try {
-      const users = await UserInformationService.getAllUsers();
-      res.status(OK).json(users);
+      const { page, limit } = req.query;
+      const usersData = await UserInformationService.getAllUsers(Number(page), Number(limit));
+      res.status(OK).json(usersData);
     } catch (error) {
-      res.status(BAD_REQUEST).json({ error: GET_USER_ERROR});
+      res.status(BAD_REQUEST).json({ error: GET_USER_ERROR });
     }
   }
 }

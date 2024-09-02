@@ -48,10 +48,19 @@ class UserInformationService {
     }
   }
 
-  async getAllUsers() {
+  async getAllUsers(page = 1, limit = 10) {
     try {
-      const users = await UserInformation.findAll();
-      return users;
+      const offset = (page - 1) * limit;
+      const { rows, count } = await UserInformation.findAndCountAll({
+        limit,
+        offset,
+      });
+      return {
+        users: rows,
+        totalUsers: count,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page,
+      };
     } catch (error) {
       throw error;
     }
