@@ -13,7 +13,7 @@ const {
   CREATED,
   OK,
   NOT_FOUND,
-}= require("../utils/statusCode.js");
+} = require("../utils/statusCode.js");
 
 class UserInformationController {
   async createUser(req, res) {
@@ -54,8 +54,14 @@ class UserInformationController {
 
   async getAllUsers(req, res) {
     try {
-      const { page, limit } = req.query;
-      const usersData = await UserInformationService.getAllUsers(Number(page), Number(limit));
+      const { page, limit, search, sortBy, sortOrder } = req.query;
+      const usersData = await UserInformationService.getAllUsers(
+        Number(page),
+        Number(limit),
+        search,
+        sortBy,
+        sortOrder
+      );
       res.status(OK).json(usersData);
     } catch (error) {
       res.status(BAD_REQUEST).json({ error: GET_USER_ERROR });

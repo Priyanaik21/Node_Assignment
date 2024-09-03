@@ -1,4 +1,5 @@
 const UserInformation = require('../models/userInformation');
+const { Op } = require('sequelize');
 
 class UserInformationService {
   async createUser(userData) {
@@ -48,13 +49,26 @@ class UserInformationService {
     }
   }
 
-  async getAllUsers(page = 1, limit = 10) {
+  async getAllUsers(page = 1, limit = 10, search = '', sortBy = 'user_id', sortOrder = 'ASC') {
     try {
       const offset = (page - 1) * limit;
+      const whereClause = search
+       ? {
+            [Op.or]: [
+              { F_name: { [Op.like]: `%${search}%` } },
+              { L_name: { [Op.like]: `%${search}%` } },
+              { email: { [Op.like]: `%${search}%` } },
+            ],
+          }
+        : {};
+
       const { rows, count } = await UserInformation.findAndCountAll({
+        where: whereClause,
         limit,
         offset,
+        order: [[sortBy, sortOrder]],
       });
+
       return {
         users: rows,
         totalUsers: count,

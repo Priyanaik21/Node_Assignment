@@ -1,10 +1,10 @@
 const InstructorService = require('../services/instructorService');
 const {
-  CREATE_INSTRUCTOR_ERROR,
-  INSTRUCTOR_NOT_FOUND,
-  UPDATE_INSTRUCTOR_ERROR,
-  DELETE_INSTRUCTOR_ERROR,
-  GET_INSTRUCTOR_ERROR,
+  CREATE_USER_ERROR,
+  USER_NOT_FOUND,
+  UPDATE_USER_ERROR,
+  DELETE_USER_ERROR,
+  GET_USER_ERROR,
 } = require('../utils/errorMessage.js');
 
 const {
@@ -20,7 +20,7 @@ class InstructorController {
       const instructor = await InstructorService.createInstructor(req.body);
       res.status(CREATED).json(instructor);
     } catch (error) {
-      res.status(BAD_REQUEST).json({ error: CREATE_INSTRUCTOR_ERROR });
+      res.status(BAD_REQUEST).json({ error: CREATE_USER_ERROR });
     }
   }
 
@@ -29,7 +29,7 @@ class InstructorController {
       const instructor = await InstructorService.getInstructorById(req.params.instructor_id);
       res.status(OK).json(instructor);
     } catch (error) {
-      res.status(NOT_FOUND).json({ error: INSTRUCTOR_NOT_FOUND });
+      res.status(NOT_FOUND).json({ error: USER_NOT_FOUND });
     }
   }
 
@@ -38,7 +38,7 @@ class InstructorController {
       const instructor = await InstructorService.updateInstructor(req.params.instructor_id, req.body);
       res.status(OK).json(instructor);
     } catch (error) {
-      res.status(BAD_REQUEST).json({ error: UPDATE_INSTRUCTOR_ERROR });
+      res.status(BAD_REQUEST).json({ error: UPDATE_USER_ERROR });
     }
   }
 
@@ -47,7 +47,7 @@ class InstructorController {
       const result = await InstructorService.deleteInstructor(req.params.instructor_id);
       res.status(OK).json(result);
     } catch (error) {
-      res.status(NOT_FOUND).json({ error: DELETE_INSTRUCTOR_ERROR });
+      res.status(NOT_FOUND).json({ error: DELETE_USER_ERROR });
     }
   }
 
@@ -56,7 +56,7 @@ class InstructorController {
       const instructors = await InstructorService.getAllInstructors();
       res.status(OK).json(instructors);
     } catch (error) {
-      res.status(BAD_REQUEST).json({ error: GET_INSTRUCTOR_ERROR });
+      res.status(BAD_REQUEST).json({ error: GET_USER_ERROR });
     }
   }
 }
